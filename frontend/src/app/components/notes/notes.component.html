@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>{{ editMode ? 'Edit Note' : 'Add Note' }}</h2>
+
+  <form class="note-form" (ngSubmit)="onSubmit()">
+    <input type="text" [(ngModel)]="newNote.title" name="title" required placeholder="Title">
+    <textarea [(ngModel)]="newNote.content" name="content" required placeholder="Content"></textarea>
+    <button type="submit">{{ editMode ? 'Update' : 'Add' }}</button>
+  </form>
+
+  <div *ngFor="let note of notes" class="note-card">
+    <h3>{{ note.title }}</h3>
+    <p>{{ note.content }}</p>
+    <small>{{ note.createdAt | date: 'short' }}</small>
+    <button (click)="onEdit(note)">Edit</button>
+    <button (click)="deleteNote(note._id!)">Delete</button>
+  </div>
+</div>
